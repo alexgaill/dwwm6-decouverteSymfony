@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!
+{% endblock %}
+
+{% block body %}
+	<pre>
+        {{ dump(categoriesList) }}
+    </pre>
+	{% if categoriesList is not empty %}
+		<ul>
+			{% for category in categoriesList %}
+				<li>
+					{{ category.title }}
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+        <p>Il n'y a pas de catégories pour le moment</p>
+	{% endif %}
+{% endblock %}
