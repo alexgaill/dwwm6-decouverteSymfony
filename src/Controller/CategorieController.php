@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CategoryController extends AbstractController
+class CategorieController extends AbstractController
 {
     #[Route('/', name: 'category')]
     public function index(): Response
@@ -17,7 +18,9 @@ class CategoryController extends AbstractController
             // ["title" => 'categorie n°3'],
             // ["title" => 'categorie n°4']
         // ];
-        $categories = null;
+        // $categories = null;
+
+        $categories = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
 
         return $this->render('category/index.html.twig', [
             'categoriesList' => $categories,

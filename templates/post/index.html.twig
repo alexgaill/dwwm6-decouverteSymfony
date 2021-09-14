@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block body %}
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Contenu</th>
+            <th>Date de création</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in listArticles %}
+            <tr>
+            <td>{{article.id}}</td>
+            <td>{{article.title}}</td>
+            <td>{{article.subContent}}</td>
+            <td>{{article.createdAt | date("d/m/Y h:i:s") }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4"> Il n'y a pas d'articles pour le moment </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

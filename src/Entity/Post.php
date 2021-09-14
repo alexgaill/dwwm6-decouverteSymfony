@@ -28,6 +28,13 @@ class Post
     private $content;
 
     /**
+     * 50 premiers caractères du contenu
+     *
+     * @var string
+     */
+    private $subContent;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -71,5 +78,11 @@ class Post
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    public function getSubContent(): ?string
+    {
+        $this->subContent = substr($this->content, 0, 50) . "...";
+        return $this->subContent;
     }
 }
