@@ -29,7 +29,6 @@ class PostController extends AbstractController
      */
     public function single(Post $post) :Response
     {
-        // $article = $this->getDoctrine()->getRepository(Post::class)->find($id);
         dump($post);
         return $this->render("post/single.html.twig", [
             "article" => $post

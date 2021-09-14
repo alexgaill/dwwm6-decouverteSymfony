@@ -11,6 +11,7 @@
             <th>Titre</th>
             <th>Contenu</th>
             <th>Date de création</th>
+            <th>Options</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
             <td>{{article.title}}</td>
             <td>{{article.subContent}}</td>
             <td>{{article.createdAt | date("d/m/Y h:i:s") }}</td>
+            <td><a href="{{ path("singlePost", {post: article.id}) }}"><button>Voir l'article</button></a></td>
             </tr>
         {% else %}
             <tr>
