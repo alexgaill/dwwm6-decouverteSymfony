@@ -26,4 +26,16 @@ class CategorieController extends AbstractController
             'categoriesList' => $categories,
         ]);
     }
+
+    /**
+     * @Route("/category/single/{categorie}", name="singleCategorie")
+     *
+     * @return Response
+     */
+    public function single (Categorie $categorie): Response
+    {
+        return $this->render("category/single.html.twig", [
+            "categorie" => $categorie
+        ]);
+    }
 }

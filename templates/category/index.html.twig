@@ -4,14 +4,11 @@
 {% endblock %}
 
 {% block body %}
-	<pre>
-        {{ dump(categoriesList) }}
-    </pre>
 	{% if categoriesList is not empty %}
 		<ul>
-			{% for category in categoriesList %}
+			{% for categorie in categoriesList %}
 				<li>
-					{{ category.title }}
+					<a href={{ path("singleCategorie", {categorie: categorie.id}) }}>{{ categorie.title }}</a>
 				</li>
 			{% endfor %}
 		</ul>
