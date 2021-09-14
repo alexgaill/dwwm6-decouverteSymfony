@@ -38,4 +38,19 @@ class CategorieController extends AbstractController
             "categorie" => $categorie
         ]);
     }
+
+    /**
+     * @Route("/category/create", name="createCategory")
+     */
+    public function create ()
+    {
+        $categorie = new Categorie();
+        $categorie->setTitle("categorie n°x");
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($categorie);
+        $manager->flush();
+
+        return $this->redirectToRoute("category");
+    }
 }
