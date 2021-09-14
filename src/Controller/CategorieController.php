@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategorieController extends AbstractController
 {
@@ -42,15 +45,31 @@ class CategorieController extends AbstractController
     /**
      * @Route("/category/create", name="createCategory")
      */
-    public function create ()
+    public function create (Request $request): Response
     {
-        $categorie = new Categorie();
-        $categorie->setTitle("categorie n°x");
+        $category = new Categorie();
+        // $categorie->setTitle("categorie n°x");
 
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($categorie);
-        $manager->flush();
+        $form = $this->createFormBuilder($category)
+                ->add("title", TextType::class, [
+                    "label" => "Titre de la catégorie",
+                    "attr" => ["class" => "form-control"]
+                ])
+                ->add("save", SubmitType::class)
+                ->getForm();
 
-        return $this->redirectToRoute("category");
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category = $form->getData();
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($category);
+            $manager->flush();
+            return $this->redirectToRoute("category");
+        }
+
+        return $this->render("category/create.html.twig", [
+            "form" => $form->createView()
+        ]);
     }
 }
