@@ -5,5 +5,8 @@
     <div>
     <p>{{ article.content}}</p>
     </div>
-    <small>Article rédigé le {{article.createdAt | date("d m Y")}} à {{article.createdAt | date("h:i:s")}}</small>
+    <p><small>Article rédigé le {{article.createdAt | date("d m Y")}} à {{article.createdAt | date("h:i:s")}}</small></p>
+    <p><small>Cet article appartient à la catégorie <strong>{{ article.category.title }}</strong></small></p>
+    <a href={{ path("updatePost", {post: article.id}) }}><button>Modifier</button></a>
+    <a href={{ path("deletePost", {post: article.id}) }}><button>Supprimer</button></a>
 {% endblock %}

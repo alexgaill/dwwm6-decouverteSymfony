@@ -39,6 +39,12 @@ class Post
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -84,5 +90,17 @@ class Post
     {
         $this->subContent = substr($this->content, 0, 50) . "...";
         return $this->subContent;
+    }
+
+    public function getCategory(): ?Categorie
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Categorie $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

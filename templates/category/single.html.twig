@@ -1,5 +1,39 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>{{ categorie.title }}</h1>
+	<h1>{{ categorie.title }}</h1>
+	<h2>Liste des articles liés à cette catégorie</h2>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Titre</th>
+				<th>Contenu</th>
+				<th>Date de création</th>
+				<th>Options</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for article in categorie.posts %}
+				<tr>
+					<td>{{article.id}}</td>
+					<td>{{article.title}}</td>
+					<td>{{article.subContent}}</td>
+					<td>{{article.createdAt | date("d/m/Y h:i:s") }}</td>
+					<td>
+						<a href="{{ path("singlePost", {post: article.id}) }}">
+							<button>Voir l'article</button>
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">
+						Il n'y a pas d'articles pour le moment
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}

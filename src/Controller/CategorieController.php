@@ -53,7 +53,10 @@ class CategorieController extends AbstractController
         $form = $this->createFormBuilder($category)
                 ->add("title", TextType::class, [
                     "label" => "Titre de la catégorie",
-                    "attr" => ["class" => "form-control"]
+                    "attr" => ["placeholder" => "Title"],
+                    'row_attr' => [
+                        'class' => 'form-floating',
+                    ],
                 ])
                 ->add("save", SubmitType::class)
                 ->getForm();
@@ -65,6 +68,7 @@ class CategorieController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($category);
             $manager->flush();
+            $this->addFlash("success", "La catégorie ". $category->getTitle() ." a bien été crée!");
             return $this->redirectToRoute("category");
         }
 

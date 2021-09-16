@@ -3,6 +3,7 @@
 {% block body %}
     {{ form_start(form) }}
         {{form_label(form.title, "Catégorie")}}
-        {{form_widget( form.title, {"attr": {"class": "form-test", "value":"coucou"}} ) }}
+        {{form_widget( form.title, {"attr": {"class": "form-test"}} ) }}
+        {{form_errors(form.title)}}
     {{ form_end(form) }}
 {% endblock %}
